@@ -12,7 +12,7 @@ for k_var in $(env | grep ^KAFKA_); do
         echo "$key=$value" >> $PROPERTIES
     else
         echo "SETTING because '${key}' found already"
-        sed -ir "s/^[#]*\s*${key}=.*/$key=$value/" $PROPERTIES
+        sed -ir "s~^[#]*\s*$key=.*~$key=$value~" $PROPERTIES
     fi
 done
 
