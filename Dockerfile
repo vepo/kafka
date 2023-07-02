@@ -2,7 +2,7 @@ FROM ubuntu as downloader
 RUN  apt-get update \
     && apt-get install -y wget
 
-RUN wget https://dlcdn.apache.org/kafka/3.4.0/kafka_2.13-3.4.0.tgz
+RUN wget https://archive.apache.org/dist/kafka/3.4.0/kafka_2.13-3.4.0.tgz
 
 RUN tar -xvzf kafka_2.13-3.4.0.tgz
 RUN rm -rf kafka_2.13-3.4.0/site-docs kafka_2.13-3.4.0/bin/windows
