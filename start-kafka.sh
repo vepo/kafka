@@ -17,8 +17,8 @@ for k_var in $(env | grep ^KAFKA_); do
 done
 
 if [[ ! -f /tmp/kraft-combined-logs/meta.properties ]]; then
-    rand=`./kafka/bin/kafka-storage.sh random-uuid`
-    ./kafka/bin/kafka-storage.sh format -t $rand -c $PROPERTIES
+    cluster_id=`[[ ! -z "$KAFKA_CLUSTER_ID" ]] && ./kafka/bin/kafka-storage.sh random-uuid || echo "$KAFKA_CLUSTER_ID"`
+    ./kafka/bin/kafka-storage.sh format -t $cluster_id -c $PROPERTIES
 fi
 
 # Run Kafka
