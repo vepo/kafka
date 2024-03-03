@@ -9,7 +9,7 @@ Using with Docker Compose
 ```yaml
 services:
   kafka:
-    image: vepo/kafka:3.4.0
+    image: vepo/kafka:3.7.0
     ports:
      - 9092:9092
     environment:
