@@ -19,7 +19,7 @@ FROM eclipse-temurin:${JAVA_VERSION}-jdk-alpine
 ENV kafka_version=3.7.0
 ENV java_version=21
 
-RUN apk add --no-cache bash
+RUN apk add --upgrade --no-cache bash expat
 
 COPY --from=downloader kafka_2.13-${kafka_version} kafka
 CMD ["./kafka/start-kafka.sh"]
