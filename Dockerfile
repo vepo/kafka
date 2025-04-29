@@ -1,29 +1,32 @@
 ARG KAFKA_VERSION=4.0.0
+ARG SCALA_VERSION=2.13
 ARG JAVA_VERSION=21
 
 FROM ubuntu as downloader
+
+ARG KAFKA_VERSION
+ARG SCALA_VERSION
+
 RUN  apt-get update \
     && apt-get install -y wget
 
-ENV kafka_version=4.0.0
-ENV java_version=21
-
-RUN wget https://archive.apache.org/dist/kafka/${kafka_version}/kafka_2.13-${kafka_version}.tgz && \
-    tar -xvzf kafka_2.13-${kafka_version}.tgz && \
-    rm -rf kafka_2.13-${kafka_version}/site-docs kafka_2.13-${kafka_version}/bin/windows && \
-    rm kafka_2.13-${kafka_version}.tgz
-ADD ./start-kafka.sh kafka_2.13-${kafka_version}/start-kafka.sh
-RUN chmod a+x kafka_2.13-${kafka_version}/start-kafka.sh
+RUN wget https://archive.apache.org/dist/kafka/${KAFKA_VERSION}/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz && \
+    tar -xvzf kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz && \
+    rm -rf kafka_${SCALA_VERSION}-${KAFKA_VERSION}/site-docs kafka_${SCALA_VERSION}-${KAFKA_VERSION}/bin/windows && \
+    rm kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz
+ADD ./start-kafka.sh kafka_${SCALA_VERSION}-${KAFKA_VERSION}/start-kafka.sh
+RUN chmod a+x kafka_${SCALA_VERSION}-${KAFKA_VERSION}/start-kafka.sh
 
 FROM eclipse-temurin:${JAVA_VERSION}-jdk-alpine
 
-ENV kafka_version=4.0.0
-ENV java_version=21
+ARG KAFKA_VERSION
+ARG SCALA_VERSION
+
 ENV KAFKA_HOME=/opt/kafka
 ENV PATH=${KAFKA_HOME}/bin:${PATH}
 
 RUN apk add --upgrade --no-cache bash expat snappy
 
 WORKDIR ${KAFKA_HOME}
-COPY --from=downloader kafka_2.13-${kafka_version} ${KAFKA_HOME}
-CMD ["./kafka/start-kafka.sh"]
+COPY --from=downloader kafka_${SCALA_VERSION}-${KAFKA_VERSION} ${KAFKA_HOME}
+CMD ["./start-kafka.sh"]
