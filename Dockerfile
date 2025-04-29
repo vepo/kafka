@@ -1,11 +1,11 @@
-ARG KAFKA_VERSION=3.8.0
+ARG KAFKA_VERSION=3.9.0
 ARG JAVA_VERSION=21
 
 FROM ubuntu as downloader
 RUN  apt-get update \
     && apt-get install -y wget
 
-ENV kafka_version=3.8.0
+ENV kafka_version=3.9.0
 ENV java_version=21
 
 RUN wget https://archive.apache.org/dist/kafka/${kafka_version}/kafka_2.13-${kafka_version}.tgz
@@ -16,7 +16,7 @@ RUN chmod a+x kafka_2.13-${kafka_version}/start-kafka.sh
 
 FROM eclipse-temurin:${JAVA_VERSION}-jdk-alpine
 
-ENV kafka_version=3.8.0
+ENV kafka_version=3.9.0
 ENV java_version=21
 
 RUN apk add --upgrade --no-cache bash expat
