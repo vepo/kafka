@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PROPERTIES=./kafka/config/kraft/server.properties
+PROPERTIES=./kafka/config/server.properties
 
 for k_var in $(env | grep ^KAFKA_); do
     key="${k_var%=*}"
