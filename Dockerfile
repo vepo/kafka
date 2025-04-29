@@ -25,7 +25,7 @@ ARG SCALA_VERSION
 ENV KAFKA_HOME=/opt/kafka
 ENV PATH=${KAFKA_HOME}/bin:${PATH}
 
-RUN apk add --upgrade --no-cache bash expat snappy
+RUN apk add --upgrade --no-cache bash expat snappy libc6-compat
 
 WORKDIR ${KAFKA_HOME}
 COPY --from=downloader kafka_${SCALA_VERSION}-${KAFKA_VERSION} ${KAFKA_HOME}
