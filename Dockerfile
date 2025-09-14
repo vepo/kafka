@@ -1,6 +1,6 @@
-ARG KAFKA_VERSION=4.0.0
+ARG KAFKA_VERSION=4.1.0
 ARG SCALA_VERSION=2.13
-ARG JAVA_VERSION=21
+ARG JAVA_VERSION=21.0.8_9-jdk-alpine-3.20
 
 FROM ubuntu as downloader
 
@@ -17,7 +17,7 @@ RUN wget https://archive.apache.org/dist/kafka/${KAFKA_VERSION}/kafka_${SCALA_VE
 ADD ./start-kafka.sh kafka_${SCALA_VERSION}-${KAFKA_VERSION}/start-kafka.sh
 RUN chmod a+x kafka_${SCALA_VERSION}-${KAFKA_VERSION}/start-kafka.sh
 
-FROM eclipse-temurin:${JAVA_VERSION}-jdk-alpine
+FROM eclipse-temurin:${JAVA_VERSION}
 
 ARG KAFKA_VERSION
 ARG SCALA_VERSION
