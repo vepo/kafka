@@ -6,7 +6,7 @@ Any config value can be set by using the `KAFKA_` prefix.
 
 Using with Docker Compose
 
-Available versions: 4.0.0, 3.9.0, 3.8.0, 3.7.0, 3.5.0, 3.4.1, 3.4.0
+Available versions: 4.1.0, 4.0.0, 3.9.0, 3.8.0, 3.7.0, 3.5.0, 3.4.1, 3.4.0
 
 ```yaml
 services:
