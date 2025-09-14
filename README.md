@@ -11,7 +11,7 @@ Available versions: 4.1.0, 4.0.0, 3.9.0, 3.8.0, 3.7.0, 3.5.0, 3.4.1, 3.4.0
 ```yaml
 services:
   kafka:
-    image: vepo/kafka:4.0.0
+    image: vepo/kafka:4.1.0
     ports:
      - 9092:9092
     environment:
